@@ -10,7 +10,7 @@ type ResistorColor =
   | "grey"
   | "white";
 
-function getResistorValue(color: ResistorColor): string {
+function getResistorValue(color: ResistorColor): number {
   const values: Record<ResistorColor, number> = {
     black: 0,
     brown: 1,
@@ -26,19 +26,21 @@ function getResistorValue(color: ResistorColor): string {
 
   const value = values[color];
   if (value === undefined) {
-    return "";
+    return 0;
   }
 
-  return `${value}`;
+  return value;
 }
 
 export function decodedValue(colors: string[]): number {
-  let stringValue = "";
+  let value = 0;
+  let multiplier = 1;
   for (let i = 0; i < 2; i++) {
     const color = colors[i];
     const resistorValue = getResistorValue(color as ResistorColor);
-    stringValue += resistorValue;
+    value = value * multiplier + resistorValue;
+    multiplier *= 10;
   }
 
-  return parseInt(stringValue);
+  return value;
 }
