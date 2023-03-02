@@ -5,7 +5,8 @@ defmodule RationalNumbers do
   Add two rational numbers
   """
   @spec add(a :: rational, b :: rational) :: rational
-  def add(a, b) do
+  def add({a1, a2} = _a, {b1, b2} = _b) do
+    {((a1 * b2) + (a2 * b1)), b1 * b2}
   end
 
   @doc """
