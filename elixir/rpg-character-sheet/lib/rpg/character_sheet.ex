@@ -1,10 +1,7 @@
 defmodule RPG.CharacterSheet do
   @spec welcome :: :ok
   def welcome() do
-    "Welcome! Let's fill out your character sheet together."
-    |> IO.puts()
-
-    :ok
+    "Welcome! Let's fill out your character sheet together." |> IO.puts()
   end
 
   @spec ask_name :: binary
@@ -40,8 +37,6 @@ defmodule RPG.CharacterSheet do
       |> Map.put(:class, ask_class())
       |> Map.put(:level, ask_level())
 
-    IO.puts("Your character: #{inspect(character)}")
-
-    character
+    IO.inspect(character, label: "Your character")
   end
 end
