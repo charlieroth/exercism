@@ -1,5 +1,24 @@
 defmodule TakeANumber do
   def start() do
-    # Please implement the start/0 function
+    spawn(__MODULE__, :loop, [0])
+  end
+
+  def loop(state) do
+    receive do
+      {:report_state, from} ->
+        send(from, state)
+        loop(state)
+
+      {:take_a_number, from} ->
+        new_state = state + 1
+        send(from, new_state)
+        loop(new_state)
+
+      :stop ->
+        :ok
+
+      _ ->
+        loop(state)
+    end
   end
 end
