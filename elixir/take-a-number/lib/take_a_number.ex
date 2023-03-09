@@ -15,6 +15,7 @@ defmodule TakeANumber do
         loop(new_state)
 
       :stop ->
+        # NOTE: Since `loop/1` is not called here. The process will exit
         :ok
 
       _ ->
