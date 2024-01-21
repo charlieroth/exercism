@@ -8,9 +8,12 @@ func dailyRateFrom(hourlyRate: Int) -> Double {
 func monthlyRateFrom(hourlyRate: Int, withDiscount discount: Double) -> Double {
     let dailyRate = dailyRateFrom(hourlyRate: hourlyRate)
     let monthlyRate = dailyRate * daysInMonth
-    return monthlyRate - ((monthlyRate * discount) / 100.00)
+    let monthlyRateWithDiscount = monthlyRate - ((monthlyRate * discount) / 100.00)
+    return monthlyRateWithDiscount.rounded()
 }
 
 func workdaysIn(budget: Double, hourlyRate: Int, withDiscount discount: Double) -> Double {
-  fatalError("Please implement the workdaysIn(budget:hourlyRate:withDiscount:) function")
+    let dailyRate = dailyRateFrom(hourlyRate: hourlyRate)
+    let dailyRateWithDiscount = dailyRate - ((dailyRate * discount) / 100.00)
+    return (budget / dailyRateWithDiscount).rounded(.down)
 }
